@@ -19,6 +19,13 @@ This is a fork of a project I've been working on creating a pomodoro timer app.
   npm i
   ```
 
+- Setup `.env` files
+  ```sh
+  cp .env.example .env
+  cp .env.example .env.test
+  ```
+  Be sure to visit these files and update the `DATABASE_URL` to match your DB settings.
+
 - Initial setup
 
   ```sh
