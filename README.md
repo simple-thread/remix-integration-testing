@@ -1,6 +1,6 @@
-# Swolmodoro
+# Remix Integration Testing Example
 
-Stay focused. Keep movin'.
+This is a fork of a project I've been working on creating a pomodoro timer app.
 
 ## Development
 
