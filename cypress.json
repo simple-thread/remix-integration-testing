@@ -1,0 +1,4 @@
+{
+    "integrationFolder": "test/e2e",
+    "ignoreTestFiles": ["tsconfig.json"]
+}
