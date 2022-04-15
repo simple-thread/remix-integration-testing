@@ -1,22 +1,11 @@
 import * as React from "react";
 import type { ActionFunction, LoaderFunction, MetaFunction } from "remix";
-import {
-  Form,
-  Link,
-  redirect,
-  useSearchParams,
-  json,
-  useActionData,
-} from "remix";
-
-import { getUserId, createUserSession } from "~/auth.server";
-
-import { createUser, getUserByEmail } from "~/models/user.server";
+import { Form, json, Link, useActionData, useSearchParams } from "remix";
+import { createUserSession } from "~/auth.server";
 import { validateEmail } from "~/helpers/helpers";
+import { createUser, getUserByEmail } from "~/models/user.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await getUserId(request);
-  if (userId) return redirect("/");
   return json({});
 };
 

@@ -1,3 +1,4 @@
+import type { LinksFunction, LoaderFunction, MetaFunction } from "remix";
 import {
   json,
   Links,
@@ -8,10 +9,9 @@ import {
   ScrollRestoration,
   useCatch,
 } from "remix";
-import type { LinksFunction, MetaFunction, LoaderFunction } from "remix";
-import tailwindStylesheet from "./styles/tailwind.css";
+import { getUser, isProtectedRoute, requireUser } from "./auth.server";
 import mainStylesheet from "./styles/fonts.css";
-import { getUser } from "./auth.server";
+import tailwindStylesheet from "./styles/tailwind.css";
 
 export const links: LinksFunction = () => {
   return [
@@ -31,6 +31,7 @@ type LoaderData = {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
+  if (isProtectedRoute(request)) await requireUser(request);
   return json<LoaderData>({
     user: await getUser(request),
   });
@@ -38,7 +39,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full bg-sand">
       <head>
         <Meta />
         <Links />

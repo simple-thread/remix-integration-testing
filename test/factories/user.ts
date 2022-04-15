@@ -1,6 +1,6 @@
 import faker from "@faker-js/faker";
-import { Prisma } from "@prisma/client";
-import { prisma } from "~/db.server";
+import type { Prisma } from "@prisma/client";
+import { db } from "~/db.server";
 
 export const UserFactory = {
   build: (attrs: Partial<Prisma.UserCreateInput> = {}) => {
@@ -10,6 +10,6 @@ export const UserFactory = {
     } as Prisma.UserCreateInput;
   },
   create: async function (attrs: Partial<Prisma.UserCreateInput> = {}) {
-    return await prisma.user.create({ data: UserFactory.build(attrs) });
+    return await db.user.create({ data: UserFactory.build(attrs) });
   },
 };

@@ -1,11 +1,11 @@
-import { FileFactory } from "./file";
-import { ProjectFactory } from "./project";
+import { ProjectFactory } from "./session";
+import { TimerFactory } from "./timer";
 import { UserFactory } from "./user";
 
 export const Factories: Record<string, any> = {
-  Project: ProjectFactory,
-  File: FileFactory,
+  Session: ProjectFactory,
+  Timer: TimerFactory,
   User: UserFactory,
 };
 
-export type FactoryNames = "Project" | "File" | "User";
+export type FactoryNames = "Session" | "Timer" | "User";

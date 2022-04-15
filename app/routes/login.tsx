@@ -1,21 +1,11 @@
 import * as React from "react";
 import type { ActionFunction, LoaderFunction, MetaFunction } from "remix";
-import {
-  Form,
-  json,
-  Link,
-  useActionData,
-  redirect,
-  useSearchParams,
-} from "remix";
-
-import { createUserSession, getUserId } from "~/auth.server";
-import { verifyLogin } from "~/models/user.server";
+import { Form, json, Link, useActionData, useSearchParams } from "remix";
+import { createUserSession } from "~/auth.server";
 import { validateEmail } from "~/helpers/helpers";
+import { verifyLogin } from "~/models/user.server";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await getUserId(request);
-  if (userId) return redirect("/");
+export const loader: LoaderFunction = async () => {
   return json({});
 };
 
@@ -67,7 +57,7 @@ export const action: ActionFunction = async ({ request }) => {
     request,
     userId: user.id,
     remember: remember === "on" ? true : false,
-    redirectTo: typeof redirectTo === "string" ? redirectTo : "/notes",
+    redirectTo: typeof redirectTo === "string" ? redirectTo : "/start",
   });
 };
 
@@ -79,7 +69,7 @@ export const meta: MetaFunction = () => {
 
 export default function LoginPage() {
   const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/notes";
+  const redirectTo = searchParams.get("redirectTo") || "/start";
   const actionData = useActionData() as ActionData;
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);

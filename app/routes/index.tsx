@@ -1,6 +1,13 @@
-import { CatchBoundaryComponent } from "@remix-run/react/routeModules";
-import { Link } from "remix";
+import { json, Link, redirect } from "remix";
+import type { LoaderFunction } from "remix";
+import { getUserId } from "~/auth.server";
 import { useOptionalUser } from "~/helpers/helpers";
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request);
+  if (userId) return redirect("/start");
+  return json({});
+};
 
 export default function Index() {
   const user = useOptionalUser();
@@ -30,7 +37,7 @@ export default function Index() {
               <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                 {user ? (
                   <Link
-                    to="/notes"
+                    to="/start"
                     className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
                   >
                     View Notes for {user.email}

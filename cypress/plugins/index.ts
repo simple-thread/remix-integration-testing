@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
 // import 'cypress';
-import { Factories, FactoryNames } from "@/test/factories";
+import type { FactoryNames } from "@/test/factories";
+import { Factories } from "@/test/factories";
 import { truncateDB } from "@/test/helpers/truncateDB";
-import { Project } from "@prisma/client";
 import { setupUserSession } from "./authentication";
 
 declare global {
@@ -58,7 +58,7 @@ export default (
       const Factory = Factories[type];
       if (!Factory) throw new Error(`Factory ${type} not found.`);
       const object = await Factory.create(attrs);
-      return object as Project;
+      return object as any;
     },
     setupUserSession,
   });

@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 import { installGlobals } from "@remix-run/node/globals";
 import { parse } from "cookie";
 import { createUserSession } from "~/auth.server";
